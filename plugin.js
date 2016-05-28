@@ -1,41 +1,59 @@
 "use strict"
 
 const postcss = require("postcss")
-const name = "postcss-short-supports"
 // const {name} = require("./package")
+const name = "postcss-blend-with"
 
-module.exports = postcss.plugin(name, options => css =>
+module.exports = postcss.plugin(name, () => css =>
 {
-    let {except = /.^/} = options || {}
-
-    css.walkDecls("background-attachment", decl =>
+    css.walkAtRules("blend-with", at =>
     {
-        if (decl.value != "fixed") return
+        let {params, parent: {nodes}, first: {prop, value}} = at
+        let selector = params.slice(1, -1)
 
-        let {parent} = decl
-        let {selector} = parent
-
-        if (except.test(selector)) return
-
-        parent.append
-        (
-            "isolation: isolate",
-            "overflow: hidden",
-            "background: none"
-        )
-
-        css.append(`${selector}::before
+        let z = nodes.reduce((index, node) =>
         {
-            content: "";
-            position: fixed;
-            z-index: -1;
-            will-change: transform;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background-image: inherit;
-            background-size: inherit;
-        }`)
+            return node.type == "decl"
+                && node.prop == "z-index"
+                ? +node.value
+                : index
+        },  0)
 
-        decl.remove()
+        let decls = nodes.filter(node =>
+        {
+            if (node.type != "decl") return
+
+            let {prop} = node
+            if (prop.startsWith("margin")) return true
+
+            return [ "left", "right", "width" ].includes(prop)
+        })
+
+        css.append(`@supports (mix-blend-mode: ${prop})
+        {
+            ${selector}
+            {
+                position: relative;
+            }
+            ${selector}::before,
+            ${selector}::after
+            {
+                content: "";
+                position: absolute;
+                top: 0;
+                height: 100%;
+                background: ${value};
+                mix-blend-mode: ${prop};
+                ${decls.join(";")};
+            }
+            ${selector}::before
+            {
+                z-index: ${z + 1};
+            }
+            ${selector}::after
+            {
+                z-index: ${z - 1};
+            }
+        }`)
     })
 })

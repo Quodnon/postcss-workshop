@@ -1,9 +1,0 @@
-@supports (display:flex)
-
-@supports (mix-blend-mode)
-{
-    body
-    {
-        background : red
-    }
-}

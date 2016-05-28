@@ -124,35 +124,3 @@ aside
         height: 100%;
     }
 }*/
-
-@supports (mix-blend-mode: difference)
-{
-
-    #fourth
-{
-        position: relative;
-    }
-
-    #fourth::before,
-            #fourth::after
-{
-        content: "";
-        position: absolute;
-        top: 0;
-        height: 100%;
-        background: rgb(255,0,0);
-        mix-blend-mode: difference;
-        right: 70px;
-        width: 100px;
-    }
-
-    #fourth::before
-{
-        z-index: 2;
-    }
-
-    #fourth::after
-{
-        z-index: 0;
-    }
-}
