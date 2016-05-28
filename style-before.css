@@ -11,7 +11,7 @@ section
     position: relative;
     z-index: 0;
     overflow: hidden;
-    background-size: 0 0;
+    background: none;
 }
 
 section::before
@@ -25,5 +25,6 @@ section::before
     width: 100%;
     height: 100%;
     background-image: inherit;
+    background-size: inherit;
 }
 
