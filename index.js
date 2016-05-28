@@ -5,6 +5,13 @@ const plugin = require("./plugin")
 //test string
 const css =
 `
+@supports filter
+{
+    body
+    {
+        filter : blur(10px);
+    }
+}
 body
 {
     color:red;

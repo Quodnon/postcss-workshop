@@ -2,4 +2,9 @@
 
 const postcss = require("postcss");
 
-module.exports =postcss.plugin("postcss-short-supports",()=>css=>{});
+module.exports =postcss.plugin("postcss-short-supports",()=>css=>{
+    css.walkAtRules("supports",supports =>
+    {
+        supports.params ="hello";
+    })
+});
