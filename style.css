@@ -44,7 +44,7 @@ aside
     position: fixed;
     z-index: 1;
     right: 70px;
-    width: 100px;
+    width: 300px;
     color: #fff;
 
     transform: rotateZ(-90deg);
@@ -58,6 +58,10 @@ aside
 
     @blend-with(#fourth){
         difference: rgb(255,0,0);
+    }
+    
+    @blend-with(#fifth){
+        difference:rgb(0,255,128);
     }
 }
 

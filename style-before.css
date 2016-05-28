@@ -44,7 +44,7 @@ aside
     position: fixed;
     z-index: 1;
     right: 70px;
-    width: 100px;
+    width: 300px;
     color: #fff;
 
     transform: rotateZ(-90deg);
@@ -58,6 +58,10 @@ aside
 
     @blend-with(#fourth){
         difference: rgb(255,0,0);
+    }
+    
+    @blend-with(#fifth){
+        difference:rgb(0,255,128);
     }
 }
 
@@ -143,7 +147,7 @@ aside
         background: rgb(255,0,0);
         mix-blend-mode: difference;
         right: 70px;
-        width: 100px;
+        width: 300px;
     }
 
     #fourth::before
@@ -152,6 +156,38 @@ aside
     }
 
     #fourth::after
+{
+        z-index: 0;
+    }
+}
+
+@supports (mix-blend-mode: difference)
+{
+
+    #fifth
+{
+        position: relative;
+    }
+
+    #fifth::before,
+            #fifth::after
+{
+        content: "";
+        position: absolute;
+        top: 0;
+        height: 100%;
+        background: rgb(0,255,128);
+        mix-blend-mode: difference;
+        right: 70px;
+        width: 300px;
+    }
+
+    #fifth::before
+{
+        z-index: 2;
+    }
+
+    #fifth::after
 {
         z-index: 0;
     }
