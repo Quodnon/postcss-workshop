@@ -17,6 +17,8 @@ module.exports = postcss.plugin(name, options => css =>
 
         if (except.test(selector)) return
 
+        parent.append({prop:"isolation", value:'isolate'})
+        
         let hasPosition = parent.some(node =>
         {
             if (node.type != "decl") return
