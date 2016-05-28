@@ -1,5 +1,3 @@
-
-Aleksey Shvayka @shvaikalesh 15:02
 "use strict"
 
 const postcss = require("postcss")
@@ -19,26 +17,25 @@ module.exports = postcss.plugin(name, options => css =>
 
         if (except.test(selector)) return
 
-        parent.append({ prop: "isolation", value: "isolate" })
-        parent.append({ prop: "overflow", value: "hidden" })
-        parent.append({ prop: "background", value: "none" })
+        parent.append
+        (
+            "isolation: isolate",
+            "overflow: hidden",
+            "background: none"
+        )
+
+        css.append(`${selector}::before
+        {
+            content: "";
+            position: fixed;
+            z-index: -1;
+            will-change: transform;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-image: inherit;
+            background-size: inherit;
+        }`)
 
         decl.remove()
-
-        css.append
-        (`
-            ${selector}::before
-            {
-                content: "";
-                position: fixed;
-                z-index: -1;
-                will-change: transform;
-
-                top: 0; left: 0;
-                width: 100%; height: 100%;
-                background-image: inherit;
-                background-size: inherit;
-            }
-        `)
     })
 })

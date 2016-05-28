@@ -10,9 +10,6 @@ section
     height: 100vh;
     isolation: isolate;
     overflow: hidden;
-    hidden: none;
-    position: relative;
-    z-index: 0;
     background: none;
 }
 
