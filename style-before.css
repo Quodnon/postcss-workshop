@@ -1,0 +1,29 @@
+body
+{
+    margin: 0;
+    font-size: 200px;
+    color: #fff;
+}
+
+section
+{
+    height: 100vh;
+    background-attachment: fixed;
+    position: relative;
+    z-index: 0;
+    overflow: hidden;
+}
+
+section::before
+{
+    content: "";
+    position: fixed;
+    z-index: -1;
+    will-change: transform;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: inherit;
+}
+

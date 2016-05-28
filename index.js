@@ -1,18 +1,11 @@
 'use strict';
 const postcss = require("postcss");
-const plugin = require("./plugin")
+const plugin = require("./plugin");
+const fs = require("fs");
 
 //test string
 const css =
-`
-@supports filter:{
-    body
-    {
-        filter : blur(10px);
-    }
-}
-
-body
+`body
 {
     margin: 0;
     font-size: 200px;
@@ -33,5 +26,6 @@ postcss().use(plugin)
     .process(css)
     .then( result=>
     {
+        fs.writeFileSync("./style-before.css",result.css);
         console.log(result.css)
-    })
+    }, console.error)
