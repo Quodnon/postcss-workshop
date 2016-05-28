@@ -11,6 +11,20 @@ const css =
         filter : blur(10px);
     }
 }
+
+body
+{
+    margin: 0;
+    font-size: 200px;
+    color: #fff;
+}
+
+section
+{
+    height: 100vh;
+    background-attachment: fixed;
+}
+
 `
 
 
