@@ -38,6 +38,9 @@ module.exports =postcss.plugin("postcss-short-supports",()=>css=>{
         if (overflow) overflow.value ='hidden'
         else parent.append({prop:'overflow',value:'hidden'})
         
+        parent.append({prop:"background-size", value:"0 0"})
+        decl.remove()
+        
         let selector =`${parent.selector}::before`
         
         css.append(

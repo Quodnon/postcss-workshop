@@ -8,10 +8,10 @@ body
 section
 {
     height: 100vh;
-    background-attachment: fixed;
     position: relative;
     z-index: 0;
     overflow: hidden;
+    background-size: 0 0;
 }
 
 section::before
